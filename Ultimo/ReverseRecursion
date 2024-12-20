@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if read A; then
+  ./inverti2.sh
+  echo $A
+fi
+exit 0
