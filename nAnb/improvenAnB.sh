@@ -12,7 +12,7 @@ midlen=$((wordlen/2))
 while (( $nread < $wordlen )) ; do
 	car=${word:nread:1}
 	(( nread++ ))
-	if [[ $car == "A" ]] ; then (( NA++)) ; fi
+	if [[ $car == "A" ]] ; then (( NA++)) ; exit 1 fi
 done
 
 
