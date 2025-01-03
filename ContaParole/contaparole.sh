@@ -38,17 +38,21 @@
 # sed 's/ /\n/g' ./prova.txt | sed 's/\t/\n/g' | .......
 
 
+#MOLTO LENTO PER FILE DI GRANDI DIMENSIONI
+# Usa il comando time per misurare il tempo di esecuzione
+time (
+    while IFS= read -r line; do
+        for word in $line; do
+            out=$(grep -o "\b$word\b" "$1" | wc -l)
+            echo "$word $out"
+        done
+    done < "$1" | sort -k2,2nr | uniq
+)
 
-while read line; do
-    for word in $line; do
-        out=`grep $word $1 | wc -l` 
-        echo $word $out 
-    done
-done < $1 | sort -k2 -r | uniq
-echo
-echo
-
+#MOLTO PIù OTTIMIZZATO
+time(
 sed 's/ /\n/g' $1  | sed 's/\t/\n/g' |
    while read RIGA ; do if [[ -n "${RIGA}" ]] ; then echo "${RIGA}" ; fi ; done |
    sort | uniq -c |
-	 while read NUM PAROLA ALTRO ; do echo "$PAROLA $NUM"; done
+	 while read NUM PAROLA ALTRO ; do echo echo "$PAROLA $NUM" ; done 
+)
