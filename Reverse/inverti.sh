@@ -1,2 +1,4 @@
 #!/bin/bash
-tac "inverti.txt"
+time(
+    tac "20M.txt" > /dev/null
+)
