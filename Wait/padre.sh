@@ -1,15 +1,14 @@
 #!/bin/bash
-pids=()
 
-for ((x=0; x<=4; x++)); do
-    ./figlio.sh &  # Simula un processo figlio
-    pids+=($!)
-    echo "Avviato figlio con PID ${pids[-1]}"
-
+for ((i=1; i<=4; i++)); do
+    echo "Avvio figlio $i"
+    sleep $((i * 2)) &  # Simula processi figli con durata diversa
 done
 
-for pid in ${pids[@]}; do
-    echo "Wait for $pid"
-    wait $pid
-    echo "$pid killed"
+# Monitora i figli in esecuzione
+while jobs | grep -q "Running"; do
+    echo "Ci sono ancora figli in esecuzione..."
+    sleep 1
 done
+
+echo "Tutti i figli sono terminati!"

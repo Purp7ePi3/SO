@@ -44,7 +44,7 @@ time (
     while IFS= read -r line; do
         for word in $line; do
             out=$(grep -o "\b$word\b" "$1" | wc -l)
-            echo "$word $out"
+            #echo "$word $out"
         done
     done < "$1" | sort -k2,2nr | uniq
 )
